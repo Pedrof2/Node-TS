@@ -1,19 +1,22 @@
 import express from 'express';
 import { Request, Response } from 'express';
-import { u } from 'framer-motion/dist/types.d-B50aGbjN';
+import { UserController } from './controller/UserController';
+
+const userController = new UserController()
 
 const server = express();
+
 server.use(express.json());
 
 server.get('/', (req: Request, res: Response) => {
     res.json({ message: 'DioBankAPI' });
   });
 
-server.post('/user', (req: Request, res: Response) => {
-    const body = req.body
-    console.log(body);
-    res.json({ message: 'User created', user: body });
-})
+
+
+server.post('/user', (userController.createUser))
+server.get('/user', userController.getAllUsers)
+
 
 
 server.listen(5000, () => 
