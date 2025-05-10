@@ -2,14 +2,16 @@ import { EntityManager } from "typeorm";
 
 interface mockManagerArgs{
     saveReturn?: object | [object]
+    findOneReturn?: object
 }
 
 export const getMockEntityManager = async ({
-    saveReturn = undefined
+    saveReturn = undefined,
+    findOneReturn = undefined
 }:mockManagerArgs) : Promise<EntityManager> => {
     const manager: Partial<EntityManager> = {}
 
     manager.save = jest.fn().mockImplementation(() => Promise.resolve(saveReturn)) //mockando a chamada da função
-
+    manager.findOne = jest.fn().mockImplementation(() => Promise.resolve(findOneReturn))
     return manager as EntityManager;
 };
