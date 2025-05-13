@@ -11,8 +11,8 @@ export class UserController {
     createUser = (req: Request, res: Response): void => {
         const user = req.body
 
-        if (!user.name) {
-            res.status(400).json({ message: 'Bad request: name required!' })
+        if (!user.name || !user.email || !user.password) {
+            res.status(400).json({ message: 'Bad request: name and email required!' })
             return;
         }else
 
@@ -21,19 +21,18 @@ export class UserController {
             return;
         }
 
-        this.userService.createUser(user.name, user.email)
+        this.userService.createUser(user.name, user.email, user.password)
         res.status(201).json({ message: 'User created' });
     };
 
-    getAllUsers = (req: Request, res: Response): void => {
-        const users = this.userService.getAllusers()
-        res.status(200).json(users)
+    getUser = (req: Request, res: Response): void => {
+        res.status(200).json()
         return;
     };
 
-    deleteUser = (req: Request, res: Response) : void => {
-        const user = req.body;
-        this.userService.deleteUser(user.name, user.email)
-        res.status(200).json({ message: 'User deleted' });
-    }
+    // deleteUser = (req: Request, res: Response) : void => {
+    //     const user = req.body;
+    //     this.userService.deleteUser(user.name, user.email)
+    //     res.status(200).json({ message: 'User deleted' });
+    // }
 }
