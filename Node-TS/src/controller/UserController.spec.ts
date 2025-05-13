@@ -50,7 +50,7 @@ describe('UserController', () => {
         const mockResponse = makeMockResponse()
         const response = userController.createUser(mockRequest, mockResponse)
         expect(mockResponse.state.status).toBe(400)
-        expect(mockResponse.state.json).toMatchObject({ message: 'Bad request: name and email required!' })
+        expect(mockResponse.state.json).toMatchObject({ message: 'Bad Request: Todos os campos são obrigatórios!'})
     })
 
     it ('Deve inserir um email', () => {
@@ -65,7 +65,7 @@ describe('UserController', () => {
         const mockResponse = makeMockResponse()
         const response = userController.createUser(mockRequest, mockResponse)
         expect(mockResponse.state.status).toBe(400)
-        expect(mockResponse.state.json).toMatchObject({ message: 'Bad request: name and email required!' })
+        expect(mockResponse.state.json).toMatchObject({ message: 'Bad Request: Todos os campos são obrigatórios!' })
     })
     
     it ('Deve inserir um PASSWORD', () => {
@@ -80,7 +80,7 @@ describe('UserController', () => {
         const mockResponse = makeMockResponse()
         const response = userController.createUser(mockRequest, mockResponse)
         expect(mockResponse.state.status).toBe(400)
-        expect(mockResponse.state.json).toMatchObject({ message: 'Bad request: name and email required!' })
+        expect(mockResponse.state.json).toMatchObject({ message: 'Bad Request: Todos os campos são obrigatórios!' })
     })
 
 

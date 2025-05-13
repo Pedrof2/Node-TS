@@ -12,7 +12,7 @@ export class UserController {
         const user = req.body
 
         if (!user.name || !user.email || !user.password) {
-            res.status(400).json({ message: 'Bad request: name and email required!' })
+            res.status(400).json({ message: 'Bad Request: Todos os campos são obrigatórios!' })
             return;
         }else
 
