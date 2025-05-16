@@ -9,6 +9,14 @@ const mockUserRepository = require('../repositories/UserRepository')
 
 describe('UserService', () => {
     const userService = new UserService(mockUserRepository)
+
+    const mockUser = {
+        user_id: '12345',
+        name: 'Test user',
+        email: 'test@test.com',
+        password: '123456'
+    }
+
     it('Deve Adicionar um novo usuário', async () => {
         mockUserRepository.createUser = jest.fn().mockImplementation(() => Promise.resolve({
             id_user: '123456',
@@ -24,6 +32,12 @@ describe('UserService', () => {
             email: 'test@test.com',
             password: '123456'
         })
+    })
+
+    it('devo retornar um token de usuário', async () => {
+        jest.spyOn(userService, 'getAuthenticatedUser').mockImplementation(() => Promise.resolve(mockUser))
+        const token = await userService.getToken('pedro@test.com', '123456')
+        expect(token).toBe('12345')
     })
 
     // it('Deve retornar todos os usuários', () => {
