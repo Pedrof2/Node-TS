@@ -25,8 +25,14 @@ export class UserController {
         res.status(201).json({ message: 'User created' });
     };
 
-    getUser = (req: Request, res: Response): void => {
-        res.status(200).json()
+    getUser = async (req: Request, res: Response) => {
+        const {userId } = req.params
+        const user = await this.userService.getUser(userId)
+        res.status(200).json({ 
+            userId: user?.user_id,
+            name: user?.name,
+            email: user?.email
+        })
         return;
     };
 

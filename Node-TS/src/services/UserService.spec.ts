@@ -1,3 +1,4 @@
+import { makeMockRequest } from "../__mocks__/mockRequest.mock";
 import { UserService } from "./UserService";
 import * as jwt from 'jsonwebtoken';
 
