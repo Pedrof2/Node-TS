@@ -1,9 +1,12 @@
 import { UserService } from "./UserService";
+import * as jwt from 'jsonwebtoken';
 
 jest.mock('../repositories/UserRepository')
 jest.mock('../database', () => {
     initialize: jest.fn()
 })
+
+jest.mock('jsonwebtoken')//mockando endereço de memoria
 
 const mockUserRepository = require('../repositories/UserRepository')
 
@@ -36,8 +39,15 @@ describe('UserService', () => {
 
     it('devo retornar um token de usuário', async () => {
         jest.spyOn(userService, 'getAuthenticatedUser').mockImplementation(() => Promise.resolve(mockUser))
+        jest.spyOn(jwt, 'sign').mockImplementation(() => 'token')
         const token = await userService.getToken('pedro@test.com', '123456')
-        expect(token).toBe('12345')
+        expect(token).toBe('token')
+    })
+
+    it('Deve retornar um erro, caso n~qao encontre o usuário', async () => {
+        jest.spyOn(userService, 'getAuthenticatedUser').mockImplementation(() => Promise.resolve(null))
+        await expect (userService.getToken ('invalid@test.com', '123456')).rejects.toThrow('Email/password invalid!')
+
     })
 
     // it('Deve retornar todos os usuários', () => {
