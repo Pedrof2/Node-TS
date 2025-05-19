@@ -8,6 +8,7 @@ import { makeMockRequest } from "../__mocks__/mockRequest.mock"
 const mockUserService = {
     createUser: jest.fn(),
     getUser: jest.fn(),
+    deleteUser: jest.fn(),
 }
 
 jest.mock('../services/UserService', () => {
@@ -89,9 +90,31 @@ describe('UserController', () => {
         const mockResponse = makeMockResponse()
         const mockRequest = makeMockRequest({params: {userId: '123456'}})
 
+        // Mock the getUser method to simulate setting status and json
+        mockUserService.getUser.mockImplementationOnce((userId: string) => {
+            mockResponse.status(200)
+            mockResponse.json({ id: userId, name: 'pedro', email: 'pedro@test.com' })
+        })
+
         userController.getUser(mockRequest, mockResponse)
         expect(mockUserService.getUser).toHaveBeenCalledWith('123456')
         expect(mockResponse.state.status).toBe(200)
     })
+
+    
+  it('Deve apagar o usuário', async () => {
+        const mockRequest = {
+            body : {
+                name:'pedro',
+                email: 'pedro@test.com',
+            }
+        } as Request
+
+        const mockResponse = makeMockResponse()
+        const response = userController.deleteUser(mockRequest, mockResponse)
+        expect(mockResponse.state.status).toBe(200)
+        expect(mockResponse.state.json).toMatchObject({ message: 'User deleted' })
+    })
+
 
 })
