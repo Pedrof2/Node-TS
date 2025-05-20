@@ -20,6 +20,8 @@ Conceitos Avançados de React Com TypeScript:
   
   -> Criando a Página com os Detalhes do Usuário (Desafio).
 
+https://diobankpedro.netlify.app/
+
 Introdução ao Node com TypeScript:
 
   -> Criando uma Aplicação com node e TS;
