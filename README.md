@@ -21,5 +21,5 @@ Conceitos Avançados do Node com TypeScript:
 
   As partes dos projetos foram desenvolvidas utilizando TDD.
 
-  certificado:
+Certificado:
 [Formação TS-Developer Pedro Francisco.pdf](https://github.com/user-attachments/files/20350013/Formacao.TS-Developer.Pedro.Francisco.pdf)
